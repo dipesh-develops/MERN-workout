@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Data {
+export interface Data {
   title: string;
   _id: string;
   reps: number;
