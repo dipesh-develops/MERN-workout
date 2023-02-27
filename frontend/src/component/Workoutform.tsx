@@ -1,4 +1,6 @@
 import { FormEventHandler, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addWorkout } from "../utils/workoutSlice";
 
 const WorkoutForm = () => {
   const [title, setTitle] = useState("");
@@ -6,11 +8,11 @@ const WorkoutForm = () => {
   const [reps, setReps] = useState("");
   const [error, setError] = useState(null);
 
+  const dispatch = useDispatch();
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-
     const workout = { title, load, reps };
-
     const response = await fetch("/api/workouts", {
       method: "POST",
       body: JSON.stringify(workout),
@@ -29,6 +31,7 @@ const WorkoutForm = () => {
       setLoad("");
       setReps("");
       console.log("new workout added:", json);
+      dispatch(addWorkout(json));
     }
   };
 

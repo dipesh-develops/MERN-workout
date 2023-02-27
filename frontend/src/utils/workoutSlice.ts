@@ -18,12 +18,15 @@ const workoutSlice = createSlice({
   name: "workout",
   initialState,
   reducers: {
-    addWorkout: (state, action: PayloadAction<Workout[]>) => {
+    addWorkouts: (state, action: PayloadAction<Workout[]>) => {
       state.items = action.payload;
+    },
+    addWorkout: (state, action: PayloadAction<Workout>) => {
+      state.items.push(action.payload);
     },
     showWorkout: (state) => {},
   },
 });
 
-export const { addWorkout } = workoutSlice.actions;
+export const { addWorkout, addWorkouts } = workoutSlice.actions;
 export default workoutSlice.reducer;
