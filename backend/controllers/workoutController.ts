@@ -28,13 +28,11 @@ export const createWorkout: express.RequestHandler = async (req, res) => {
 
   //add doc to db
   try {
-    const workout = await Workout.create({ title, reps, load });
+    const workout = await Workout.create({ title, load, reps });
     res.status(200).json(workout);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
-
-  res.json({ msg: "post a workout" });
 };
 
 //delete a workout
