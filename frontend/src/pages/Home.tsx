@@ -29,7 +29,7 @@ const Home = () => {
       }
     };
     fetchWorkouts();
-  }, []);
+  }, [dispatch]);
 
   const workoutItems = useSelector(
     (store: RootState) => store.workout.items
