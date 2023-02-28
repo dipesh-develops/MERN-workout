@@ -24,9 +24,14 @@ const workoutSlice = createSlice({
     addWorkout: (state, action: PayloadAction<Workout>) => {
       state.items.push(action.payload);
     },
-    showWorkout: (state) => {},
+    deleteWorkout: (state, action: PayloadAction<Workout>) => {
+      console.log("delete fire");
+      state.items = state.items.filter(
+        (item) => item._id !== action.payload._id
+      );
+    },
   },
 });
 
-export const { addWorkout, addWorkouts } = workoutSlice.actions;
+export const { addWorkout, addWorkouts, deleteWorkout } = workoutSlice.actions;
 export default workoutSlice.reducer;
