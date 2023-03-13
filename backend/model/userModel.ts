@@ -9,6 +9,7 @@ interface IUser extends mongoose.Document {
 
 interface IUserModel extends mongoose.Model<IUser> {
   signup(email: string, password: string): Promise<IUser>;
+  login(email: string, password: string): Promise<IUser>;
 }
 
 // const Schema = mongoose.Schema;
@@ -51,6 +52,28 @@ userSchema.statics.signup = async function (
   const user = await this.create({ email, password: hash });
   return user;
 };
+
+//static login method
+userSchema.statics.login = async function (email, password) {
+  if (!email || !password) {
+    throw Error("All fields must be filled");
+  }
+
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw Error("Incorrect email");
+  }
+
+  const match = await bcrypt.compare(password, user.password); //returns true of false
+
+  if (!match) {
+    throw Error("Incorrect password");
+  }
+
+  return user;
+};
+
 const User = mongoose.model<IUser, IUserModel>("User", userSchema);
 
 export default User;
