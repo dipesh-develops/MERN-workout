@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import workoutSlice from "./workoutSlice";
+import userSlice from "./userSlice";
 
 export interface RootState {
   workout: {
@@ -10,6 +11,7 @@ export interface RootState {
 const store = configureStore({
   reducer: {
     workout: workoutSlice,
+    user: userSlice,
   },
 });
 
